@@ -525,15 +525,9 @@ def get_historical_dividends(symbol, start_date, end_date):
     daily_data = content.splitlines()
     hist_dict = dict()
     keys = daily_data[0].split(',')
-    print len(keys)
     for day in daily_data[1:]:
         day_data = day.split(',')
         date = day_data[0]
         hist_dict[date] = \
-            {keys[1]: day_data[1],
-             keys[2]: day_data[2],
-             keys[3]: day_data[3],
-             keys[4]: day_data[4],
-             keys[5]: day_data[5],
-             keys[6]: day_data[6]}
+            {keys[1]: day_data[1]}
     return hist_dict
