@@ -498,3 +498,21 @@ def get_historical_prices(symbol, start_date, end_date):
              keys[5]: day_data[5],
              keys[6]: day_data[6]}
     return hist_dict
+
+def get_historical_dividends(symbol, start_date, end_date):
+
+	url = 'http://ichart.yahoo.com/table.csv?s=%s&' % symbol + \
+	'd=%s&' % str(int(end_date[4:6]) - 1) + \
+	'e=%s&' % str(int(end_date[6:8])) + \
+	'f=%s&' % str(int(end_date[0:4])) + \
+	'g=v&' + \
+	'a=%s&' % str(int(start_date[4:6]) - 1) + \
+	'b=%s&' % str(int(start_date[6:8])) + \
+	'c=%s&' % str(int(start_date[0:4])) + \
+	'ignore=.csv'
+
+	#print url
+	days = urllib.urlopen(url).readlines()
+
+	data = [day[:-2].split(',') for day in days]
+	return data
